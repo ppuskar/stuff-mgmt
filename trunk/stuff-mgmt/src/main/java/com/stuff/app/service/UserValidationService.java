@@ -43,8 +43,9 @@ public class UserValidationService {
 		if (user.getEmailId() == null) {
 			throw new IllegalStateException(USER_EMAIL_ID_CANNOT_BE_NULL);
 		}
-		
-		return false;
+		user = this.userDAO.get(user);
+
+		return user == null ? false : true;
 	}
 
 	/**
