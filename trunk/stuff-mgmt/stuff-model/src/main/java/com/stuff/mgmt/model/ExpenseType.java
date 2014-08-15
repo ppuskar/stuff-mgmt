@@ -3,13 +3,14 @@ package com.stuff.mgmt.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name = "expense_type")
 public class ExpenseType {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "expense_type_id")
 	private int expenseTypeId;
 

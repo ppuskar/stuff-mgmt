@@ -1,4 +1,4 @@
-package com.stuff.mgmt.dal.config;
+package com.stuff.mgmt.dal;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,14 +10,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
-import com.stuff.mgmt.dal.UserDAO;
-
 @Configuration
-public class DALConfig {
+public class DALTestConfig {
 
 	@Value("${jpa.persistenceUnit}")
-	private String persistenceUnit;
-
+    private String persistenceUnit;
+	
 	@Bean
 	public EntityManager entityManager() {
 		EntityManager entityManager = entityManagerFactory()
@@ -41,15 +39,10 @@ public class DALConfig {
 	public PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
 		return new PropertySourcesPlaceholderConfigurer();
 	}
-
+	
 	@Configuration
-	@PropertySource(value = { "classpath:dal.properties" })
-	static class PropertiesContextConfiguration {
-	}
-
-	@Bean
-	public UserDAO userDAO() {
-		return new UserDAO();
-	}
+    @PropertySource(value = { "classpath:dal.properties" })
+    static class PropertiesContextConfiguration {
+    }
 
 }

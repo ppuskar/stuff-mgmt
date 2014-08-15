@@ -5,9 +5,13 @@ import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 /**
  * @author Illusion
@@ -17,6 +21,7 @@ import javax.persistence.OneToOne;
 public class Expense {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "expense_id")
 	private long expenseId;
 
@@ -26,10 +31,13 @@ public class Expense {
 	@Column(name = "description")
 	private String description;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "expense_type_id")
 	private ExpenseType expenseType;
 
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "group_member_id")
+	private GroupMember member;
 
 	/**
 	 * @return the expenseId
@@ -75,5 +83,21 @@ public class Expense {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	/**
+	 * @return the member
+	 */
+	public GroupMember getMember() {
+		return member;
+	}
+
+	/**
+	 * @param member the member to set
+	 */
+	public void setMember(GroupMember member) {
+		this.member = member;
+	}
+
+	
 
 }
